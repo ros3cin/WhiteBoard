@@ -5,12 +5,17 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
+group :development, :test do
+gem 'sqlite3'
+end
 gem 'omniauth-redu'
 gem 'debugger'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'json'
+group :production do
+gem 'activerecord-postgresql-adapter'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
