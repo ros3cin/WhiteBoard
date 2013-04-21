@@ -24,7 +24,10 @@ $(document).ready(function() {
   $("#menuPrincipal").mouseout( function() {
   	fecharMenuOpcoes()
   });
- 
+  
+  $("#exportarPNG").click( function() {
+  	 $("#abrirModalExportarPNG").click();
+  });
   
   
 });

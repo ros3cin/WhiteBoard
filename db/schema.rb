@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419042547) do
+ActiveRecord::Schema.define(:version => 20130421021143) do
+
+  create_table "esquemas", :force => true do |t|
+    t.string   "nome"
+    t.string   "jsonstr"
+    t.binary   "pngbin"
+    t.integer  "usuario_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "esquemas", ["usuario_id"], :name => "index_esquemas_on_usuario_id"
 
   create_table "usuarios", :force => true do |t|
     t.integer  "uid"

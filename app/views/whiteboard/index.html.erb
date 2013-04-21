@@ -12,11 +12,15 @@
 <%= javascript_include_tag "draw2dlib/json2" %>
 <%= javascript_include_tag "draw2dlib/draw2d" %>
 <%= javascript_include_tag "draw2dlib/codigo" %>
+<%= javascript_include_tag "redu-js/bootstrap-redu" %>
+<%= javascript_include_tag "redu-js/vendor/jquery.autosize" %>
+
 
 <div style="width: 700px; margin: 0 auto;">
     <button id="conexaoDireta" class="button-default">Retificar ligações</button>
   	<button id="addH" class="button-default">Adicionar hidrogênio</button>
   	<button id="addC" class="button-default">Adicionar carbono</button>
+  	<a style="display:none" id="abrirModalExportarPNG" href="#mbExportarPNG" data-toggle="modal"></a>
     <div onselectstart="javascript:/*IE8 hack*/return false" id="gfx_holder" style="width:700px; height:600px;-webkit-tap-highlight-color: rgba(0,0,0,0); background-color: white;border: 1px solid #CCC;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;position: relative">
     	<ul id="menuPrincipal" style="list-style-type: none;padding:0;margin:0;position:relative;">
     		<li>
@@ -40,5 +44,24 @@
     	<ul>
     </div>
     
+</div>
+
+<!-- MODAL EXPORTAR PNG -->
+<div>
+<div id="mbExportarPNG" class="modal hide">
+  <div class="modal-header">
+    <!-- IF WANT TO ADD CLOSE BUTTON TO UPPER RIGHT -->
+    <span class="modal-close icon-close-big-gray_16_18 text-replacement" data-dismiss="modal" title="Fechar">Fechar</span>
+    <!-- END -->
+    <h3 class="modal-title">Exportar modelo</h3>
+    <a class="modal-subtitle" href="#">Selecione um mural para exportar seu modelo</a>
+  </div>
+  <div class="modal-body">
+    <p>Testando a vida não é fácil!<p>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="button-primary">Fechar</button>
+  </div>
+</div>
 </div>
 
