@@ -1,5 +1,7 @@
 WhiteBoard::Application.routes.draw do
   
+  get "whiteboard/index"
+
   get '/auth/:provider/callback', to: 'session#create'
   match 'inicial', to: 'home#index'
 

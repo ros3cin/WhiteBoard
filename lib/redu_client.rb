@@ -23,8 +23,45 @@ class ReduClient
     connection.delete("api/canvas/#{canvas_id}")
   end
   
+  def retorna_disciplinas_possiveis()
+    puts json_bonito spec_info("enrollments")
+    spec_info("enrollments").each do |atual|
+      if ( atual["role"] == "environment_admin" && atual["state"] == "approved") 
+        atual["links"].each do |link|
+          if ( link["rel"] == "environment" )
+            ava = link["href"]
+            ava.slice! "http://www.redu.com.br/api/courses/"
+            cursos = connection.get("api/environments/#{ava}/courses").body
+            puts json_bonito cursos
+            
+            cursos.each do |curso|
+              disciplinas = connection.get("/api/courses/#{curso["id"]}/spaces").body
+              puts json_bonito disciplinas
+              
+              disciplinas.each do |disciplina|
+                if (disciplina["id"] == 2958)
+                  attrs = { :canvas => { :current_url => 'http://localhost:3000/whiteboard/index', :name => "Novo Canvas 12334" } }
+                  connection.post("api/spaces/#{disciplina["id"]}/canvas", attrs)
+                end
+              end
+              
+            end
+            
+          end
+        end
+        
+      end
+    end
+    
+  end
+  
+  def json_bonito(jsonObj)
+    JSON.pretty_generate(jsonObj)
+  end
+  
   def minhas_info()
     response = connection.get("api/me")
+    puts json_bonito response.body
     response.body
   end
   

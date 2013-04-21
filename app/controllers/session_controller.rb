@@ -16,7 +16,14 @@ class SessionController < ApplicationController
 
     session[:user_id] = usuario.id
     
-    redirect_to '/inicial'
+    if (session[:redirect_to])
+      redirect_to session[:redirect_to]
+      session[:redirect_to] = nil
+    else
+       redirect_to '/inicial'
+    end
+    
+   
   end
   
   protected

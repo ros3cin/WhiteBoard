@@ -11,4 +11,6 @@ class ApplicationController < ActionController::Base
   def client(space_id)
     ReduClient.new(current_user.access_token, space_id)
   end
+  
+  
 end
