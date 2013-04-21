@@ -15,7 +15,7 @@ WhiteBoard::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -46,7 +46,24 @@ WhiteBoard::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( draw2dlib/shifty.js )
+  config.assets.precompile += %w( draw2dlib/raphael.js )
+  config.assets.precompile += %w( draw2dlib/jquery-1.8.1.min.js )
+  config.assets.precompile += %w( draw2dlib/jquery-ui-1.8.23.custom.min.js )
+  config.assets.precompile += %w( draw2dlib/jquery.layout.js )
+  config.assets.precompile += %w( draw2dlib/jquery.autoresize.js )
+  config.assets.precompile += %w( draw2dlib/jquery-touch_punch.js )
+  config.assets.precompile += %w( draw2dlib/jquery.contextmenu.js )
+  config.assets.precompile += %w( draw2dlib/rgbcolor.js )
+  config.assets.precompile += %w( draw2dlib/canvg.js )
+  config.assets.precompile += %w( draw2dlib/Class.js )
+  config.assets.precompile += %w( draw2dlib/json2.js )
+  config.assets.precompile += %w( draw2dlib/draw2d.js )
+  config.assets.precompile += %w( draw2dlib/codigo.js )
+  config.assets.precompile += %w( redu-js/bootstrap-redu.js )
+  config.assets.precompile += %w( redu-js/vendor/jquery.autosize.js )
+  config.assets.precompile += %w( bootstrap-redu/bootstrap-redu.min.css )
+  config.assets.precompile += %w( bootstrap-redu/docs.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
