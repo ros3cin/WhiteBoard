@@ -9,6 +9,11 @@ class ReduClient
     connection.post("api/spaces/#{@space_id}/canvas", attrs)
   end
   
+  def criar_canvas_disciplina(url,id)
+    attrs = { :canvas => { :current_url => url, :name => "WhiteBoard" } }
+    connection.post("api/spaces/#{id}/canvas", attrs)
+  end
+  
   def create_canvas_on_subject(url, name, subject_id)
     attrs = { :lecture => { :current_url => url, :name => name, :type => 'Canvas' } }
     connection.post("api/subject/"+subject_id+"/lectures", attrs)
@@ -25,24 +30,38 @@ class ReduClient
   
   def retorna_disciplinas_possiveis()
     puts json_bonito spec_info("enrollments")
-    spec_info("enrollments").each do |atual|
-      if ( atual["role"] == "environment_admin" && atual["state"] == "approved") 
+    disciplinasReturn = [];
+    disciplinasNomes = [];
+    infosEnrol = spec_info("enrollments")
+    infosEnrol.each do |atual|
+      if ( ( atual["role"] == "environment_admin" || atual["role"] == "teacher" )  && atual["state"] == "approved") 
         atual["links"].each do |link|
           if ( link["rel"] == "environment" )
             ava = link["href"]
             ava.slice! "http://www.redu.com.br/api/courses/"
             cursos = connection.get("api/environments/#{ava}/courses").body
             puts json_bonito cursos
+            puts "fim de cursos"
             
             cursos.each do |curso|
+              
+              
               disciplinas = connection.get("/api/courses/#{curso["id"]}/spaces").body
               puts json_bonito disciplinas
+              puts "fim de disciplina"
               
               disciplinas.each do |disciplina|
-                if (disciplina["id"] == 2958)
-                  attrs = { :canvas => { :current_url => 'http://localhost:3000/whiteboard/index', :name => "Novo Canvas 12334" } }
-                  connection.post("api/spaces/#{disciplina["id"]}/canvas", attrs)
+                
+                puts json_bonito disciplina
+                puts "disciplina"
+                
+                if(disciplina.kind_of?(Hash))
+                  unless disciplinasNomes.include?(disciplina["name"])
+                    disciplinasReturn << disciplina
+                    disciplinasNomes << disciplina["name"]
+                  end
                 end
+                
               end
               
             end
@@ -52,7 +71,7 @@ class ReduClient
         
       end
     end
-    
+    disciplinasReturn
   end
   
   def json_bonito(jsonObj)

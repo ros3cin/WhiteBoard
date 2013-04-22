@@ -1,4 +1,4 @@
-//Aqui é como se fosse o main
+//Aqui é como se fosse o main[]
 $(document).ready(function() {
   var canvas = new draw2d.Canvas("gfx_holder");
 
@@ -26,11 +26,25 @@ $(document).ready(function() {
   });
   
   $("#exportarPNG").click( function() {
-  	 $("#abrirModalExportarPNG").click();
+  	 //var writer = new draw2d.io.png.Writer();
+	 //var png = writer.marshal(canvas);
+     //$("#preview").attr("src",png);
+     //$('#caminho').append(png);
+     //$("#preview").attr("src",png);
+     
+     //TODO funciona!
+     //var svg = canvas.getHtmlContainer().html().replace(/>\s+/g, ">").replace(/\s+</g, "<");
+     //svg = svg.replace("overflow: hidden; position: absolute;","overflow: hidden; position: absolute;border: 1px solid black;");
+     //$('#reslt').append(svg);
+     //$('#reslt > #menuPrincipal').remove();
+     
+     $("#abrirModalExportarPNG").click();
   });
   
   
 });
+
+
 
 
 //qualquer duvida, vide API: http://draw2d.org/draw2d_touch/jsdoc/#!/api

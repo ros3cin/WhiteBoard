@@ -1,6 +1,7 @@
 WhiteBoard::Application.routes.draw do
   
   get "whiteboard/index", to: 'whiteboard#index'
+  post "addCanvas", to: 'home#adicionarCanvas'
 
   get '/auth/:provider/callback', to: 'session#create'
   match 'inicial', to: 'home#index'

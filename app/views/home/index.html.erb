@@ -1,6 +1,23 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<p>Login:<%= @login %></p>
-<p>Email:<%= @email %></p>
-<p>Uid:<%= @uid %></p>
+<h1>Escolha uma disciplina para adicionar o canvas</h1>
+<div style="width:400px">
 
+
+<%= form_tag 'addCanvas', {:method => 'post'} do %>
+<div class="control-group ">
+  <div class="control-label">
+    <label>Disciplinas</label>
+  </div>
+  <div class="controls">
+  	<% @disciplinas.each do |disciplina| %>
+  	<label class="control-radio">
+      <%= radio_button_tag 'disciplina_escolhida',disciplina["name"] %>
+      <%= disciplina["name"] %>
+    </label>
+     <% end %>
+    <%= submit_tag 'Adicionar', {:class => 'button-default'} %>
+</div>
+<% end %>
+
+<!-- <p><%= @sucesso %></p> -->
+<!--<p><%= @path_canvas %></p> -->
+</div>
