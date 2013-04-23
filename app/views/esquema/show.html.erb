@@ -1,0 +1,11 @@
+<script>
+	$(document).ready(function() {
+		var svg = document.getElementById('svgConteudo').value;
+		$('#svgContainer').append(svg);
+		$('svg').attr("style","overflow: hidden; position: absolute;border: 1px solid #ccc;;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;position: relative");
+	}); 
+</script>
+<%= hidden_field_tag 'svgConteudo', @svg %>
+<div id='svgContainer' style="margin: 0 auto;width:800px">
+	<h4><%= @nomeEsquema %> - <%= @nomeUsuario %></h4>
+</div>

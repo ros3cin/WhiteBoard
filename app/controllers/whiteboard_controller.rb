@@ -11,6 +11,16 @@ class WhiteboardController < ApplicationController
       redirect = request.fullpath
       session['redirect_to'] = redirect
       redirect_to "/auth/redu"
+    else
+      if(params[:redu_user_id])
+        if (Integer(params[:redu_user_id]) != Integer(session[:user_id]))
+          redirect = request.fullpath
+          puts "redu id #{params[:redu_user_id]}"
+          puts "session id #{session[:user_id]}"
+          session['redirect_to'] = redirect
+          redirect_to "/auth/redu"
+        end
+      end
     end
   end
 end

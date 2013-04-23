@@ -14,7 +14,7 @@ class SessionController < ApplicationController
       end
     end
 
-    session[:user_id] = usuario.id
+    session[:user_id] = usuario.uid
     
     if (session[:redirect_to])
       redirect_to session[:redirect_to]

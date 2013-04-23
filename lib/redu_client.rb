@@ -9,6 +9,11 @@ class ReduClient
     connection.post("api/spaces/#{@space_id}/canvas", attrs)
   end
   
+  def postarEsquemaNoMural(idSpace,link,nome)
+    atrrs = { :status => { :text => 'Link para meu WhiteBoard ['+nome+']: '+link } }
+    connection.post("api/spaces/#{idSpace}/statuses",atrrs)
+  end
+  
   def criar_canvas_disciplina(url,id)
     attrs = { :canvas => { :current_url => url, :name => "WhiteBoard" } }
     connection.post("api/spaces/#{id}/canvas", attrs)

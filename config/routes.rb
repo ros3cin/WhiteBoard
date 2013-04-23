@@ -2,6 +2,8 @@ WhiteBoard::Application.routes.draw do
   
   get "whiteboard/index", to: 'whiteboard#index'
   post "addCanvas", to: 'home#adicionarCanvas'
+  post 'postarNoMural', to: 'esquema#postarNoMural'
+  match 'esquemas/:id/show' => 'esquema#show', :as => :esquema
 
   get '/auth/:provider/callback', to: 'session#create'
   match 'inicial', to: 'home#index'
