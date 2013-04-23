@@ -3,7 +3,7 @@ class CreateEsquemas < ActiveRecord::Migration
     create_table :esquemas do |t|
       t.string :nome
       t.string :jsonstr
-      t.string :svgstr
+      t.text :svgstr
       t.references :usuario
 
       t.timestamps
