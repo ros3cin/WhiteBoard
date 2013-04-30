@@ -60,6 +60,11 @@ $(document).ready(function() {
      $('#esquemaSVG').attr('value',document.getElementById('reslt').innerHTML);
      $('#reslt > svg').remove();
      
+     $('#noticePostSuccess').hide();
+	 $('#noticePostFailure').hide();
+	 $('#postMural').show();
+	 $('#carregando').hide();
+     
      $("#abrirModalExportarPNG").click();
   });
   

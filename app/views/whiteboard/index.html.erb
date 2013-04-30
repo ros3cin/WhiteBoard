@@ -15,7 +15,24 @@
 <%= javascript_include_tag "redu-js/bootstrap-redu" %>
 <%= javascript_include_tag "redu-js/vendor/jquery.autosize" %>
 
-
+<script>
+$(document).ready(function () {
+	$('#btnFechaModal').click(function() {
+		$('#noticePostSuccess').hide();
+		$('#noticePostFailure').hide();
+		$('#postMural').show();
+		$('#carregando').hide();
+	});
+	
+	$('#postMural').mouseup(function() {
+		var valor = document.getElementById('nomeCanvas').value;
+		if(valor !== "") {
+			$('#postMural').hide();
+			$('#carregando').show();
+		}
+	});
+});
+</script>
 
 <div style="width: 700px; margin: 0 auto;">
     <button id="conexaoDireta" class="button-default">Retificar ligações</button>
@@ -58,19 +75,18 @@
 <div>
 <div id="mbExportarPNG" class="modal hide">
   <div class="modal-header">
-    <!-- IF WANT TO ADD CLOSE BUTTON TO UPPER RIGHT -->
-    <span class="modal-close icon-close-big-gray_16_18 text-replacement" data-dismiss="modal" title="Fechar">Fechar</span>
-    <!-- END -->
     <h3 class="modal-title">Exportar modelo</h3>
     <a class="modal-subtitle" href="#">Selecione um mural para exportar seu modelo</a>
   </div>
   <div class="modal-body">
-    <%= form_tag '/postarNoMural',{:remote => true, :method => 'post', :id=>"formPostMural"}  do %>
+  	<p id='noticePostSuccess' style="display:none">Postado no mural com sucesso!</p>
+  	<p id='noticePostFailure' style="display:none">Falha ao postar no mural!</p>
+    <%= form_tag url_for(:controller => 'esquema',:action => 'postarNoMural'),{:remote => true, :id=>"formPostMural"}  do %>
     
     	<div class="control-group">
 		  <div class="controls">
 		    <%= label_tag 'nomeCanvas', 'Nome do esquema', {:style => 'color:gray'} %>
-		    <%= text_field_tag 'nomeCanvas', nil, {:maxlength => 100, :required => 'required'} %>
+		    <%= text_field_tag 'nomeCanvas', nil, {:maxlength => 100, :required => 'required', :id => 'nomeCanvas'} %>
 		    <%= hidden_field_tag 'esquemaSVG' %>
 		    <%= hidden_field_tag 'idSpace', params[:redu_space_id] %>
 		    <%= hidden_field_tag 'redu_user_id', params[:redu_user_id] %>
@@ -78,10 +94,11 @@
 		</div>
     <%= submit_tag 'Postar no mural', {:class => 'button-primary', :style => 'float:right;margin-top:10px', :id => "postMural"} %>
     <% end %>
-    
+    <img id='carregando' src="../assets/img/spinner-blue.gif" style='margin-left: 230px;display:none;'>
+	    
   </div>
   <div class="modal-footer">
-    <button data-dismiss="modal" class="button-primary">Fechar</button>
+    <button id='btnFechaModal' data-dismiss="modal" class="button-primary">Fechar</button>
   </div>
 </div>
 </div>

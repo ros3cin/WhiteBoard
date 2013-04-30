@@ -4,13 +4,18 @@ class EsquemaController < ApplicationController
     puts params
     novoEsquema = current_user.esquemas.create(:svgstr => params[:esquemaSVG], :nome => params[:nomeCanvas])
     
+
     if (params[:idSpace])
-      client(1).postarEsquemaNoMural(params[:idSpace],esquema_url(:id => novoEsquema.id),params[:nomeCanvas])
+     results = client(1).postarEsquemaNoMural(params[:idSpace],esquema_url(:id => novoEsquema.id),params[:nomeCanvas])
     end
     respond_to do |format|
-      format.json { render :json => @messages }
-      format.html { redirect_to 'whiteboard/index' }
+      if (results && results.status == 201)
+        format.js {render :action => 'postarNoMuralSucesso'} 
+      else
+        format.js {render :action => 'postarNoMuralFalha'} 
+      end
     end
+    
   end
   
   def show
